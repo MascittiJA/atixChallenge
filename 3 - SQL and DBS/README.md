@@ -1,4 +1,4 @@
-# a
+# a.
 
 ```SQL
 SELECT u.username
@@ -7,7 +7,7 @@ INNER JOIN persona p ON u.id = p.idUsuario
 WHERE p.nombre LIKE 'Jorg%'
 ```
 
-# b
+# b.
 
 ```SQL
 SELECT MES
