@@ -1,20 +1,19 @@
 # a.
 
 ```SQL
-SELECT u.username
-FROM usuaruo u
-INNER JOIN persona p ON u.id = p.idUsuario
+SELECT u.*
+FROM Usuario u
+INNER JOIN Persona p ON u.id = p.idUsuario
 WHERE p.nombre LIKE 'Jorg%'
 ```
 
 # b.
 
+No hay definiciones en el enunciado, pero asumo que p.idUsuario nunca e null y podria tener más de un usuario cada persona.
+
 ```SQL
-SELECT MES
-FROM (
-    SELECT MONTH(p.fechaNac) as MES, COUNT(p.id)
-    FROM persona p
-    GROUP BY MONTH(p.fechaNac)
-    HAVING COUNT(p.id) > 10
-)
+SELECT MONTH(p.fechaNac)
+FROM Persona p
+GROUP BY MONTH(p.fechaNac)
+HAVING COUNT(1) > 10
 ```
