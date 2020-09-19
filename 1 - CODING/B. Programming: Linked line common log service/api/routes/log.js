@@ -12,9 +12,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req,res,next) => {
+    const newEntry = logService.newMessage(req.body.msg);
     res.status(201).json({
         result: "POST OK",
-        body: req.body
+        body: req.body,
+        newEntry: newEntry,
     });
 })
 
