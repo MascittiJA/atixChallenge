@@ -3,5 +3,6 @@
 Readme del proyecto
 
 ```Bash
-cd api && npm install && npm start
+cd api && npm install
+DEBUG=api:* PORT=3000 npm start
 ```

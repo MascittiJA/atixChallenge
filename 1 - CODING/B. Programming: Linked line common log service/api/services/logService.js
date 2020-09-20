@@ -4,6 +4,8 @@ module.exports = {
     newMessage: newMessage,
 }
 
+const debug = require('debug')('api:DEBUG')
+
 // To read CSV
 const fs = require('fs'); // file system module
 const path = require('path');
@@ -44,17 +46,17 @@ function getLastLine()  {
 getLastLine()
     .then(lastLine => {
         lastLog = lastLine;
-        console.log("Last line of file: ",lastLine);
+        debug("Last line of file: ",lastLine);
     })
     .catch(err => {
-        console.log(err);
+        debug(err);
     })
 
 
 //To hash messagges
 const crypto = require("crypto");
 // Regex to check PoW
-const re = new RegExp('^00');
+const re = new RegExp('^00.*');
 // WriteStream para escribir nuevas líneas en el CSV
 const writeStream = fs.createWriteStream(filePath, {flags:'a'});
 
@@ -76,8 +78,8 @@ function getNewLogLine(message) {
                     .update(lastLog, 'utf-8')
                     .digest('hex')
                     .toString()
-    console.log("Old line: ", lastLog);
-    console.log("Old Hash: ", oldHash);
+    debug("Old line: ", lastLog);
+    debug("Old Hash: ", oldHash);
     
     let nonce = 0;
     let newHash = '';
@@ -92,8 +94,8 @@ function getNewLogLine(message) {
         nonce++;
     } while (!re.test(newHash));
     
-    console.log("New Log Entry: ", newLog)
-    console.log("New Hash: ", newHash);
+    debug("New Log Entry: ", newLog)
+    debug("New Hash: ", newHash);
  
     return newLog;
 }
